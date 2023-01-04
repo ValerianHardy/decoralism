@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <title>Изменения заказа</title>
+</head>
+<body>
+<h3>Заказы</h3>
+<form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${order.getId()})}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'getPerson: ' + ${order.getPerson()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}" ></p>
+    <select name="status" id="status" >
+        <!--        опционалка перечисления статуса-->
+        <option th:each="colorOpt : ${T(com.example.springsecurityapplication.enumm.Status).values()}"
+                th:value="${colorOpt}" th:text="${colorOpt}"></option>
+    </select>
+    <!--    <p th:text="'Статус: ' + ${order.getStatus()}"></p>-->
+    <input type="submit" value="Изменить статус">
+</form>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Изменения заказа</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h3>Заказы</h3>-->
+<!--<form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${order.getId()})}" th:object="${order}">-->
+<!--    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>-->
+<!--    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">-->
+<!--    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>-->
+<!--    <p th:text="'Количество: ' + ${order.getCount()}"></p>-->
+<!--    <p th:text="'getPerson: ' + ${order.getPerson()}"></p>-->
+<!--    <p th:text="'Цена: ' + ${order.getPrice()}"></p>-->
+<!--    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}" ></p>-->
+<!--    <select name="status" id="status" >-->
+<!--        &lt;!&ndash;        опционалка перечисления статуса&ndash;&gt;-->
+<!--        <option th:each="colorOpt : ${T(com.example.springsecurityapplication.enumm.Status).values()}"-->
+<!--                th:value="${colorOpt}" th:text="${colorOpt}"></option>-->
+<!--    </select>-->
+<!--    &lt;!&ndash;    <p th:text="'Статус: ' + ${order.getStatus()}"></p>&ndash;&gt;-->
+<!--    <input type="submit" value="Изменить статус">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

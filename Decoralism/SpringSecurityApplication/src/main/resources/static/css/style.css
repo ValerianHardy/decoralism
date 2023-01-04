@@ -1,0 +1,152 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h3{
+    padding: 10px 0 10px 0;
+}
+.login{
+    background-image: url(https://bloomifique.com/wp-content/uploads/2016/07/Anthurium_Curtain.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+body
+{
+
+    background: #eaf3ec;
+
+}
+
+/*Хедер*/
+header{
+    background-color: rgb(74, 103, 103);
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+#logo{
+
+    color: #eaf3ec;
+    text-shadow: -8px 5px 9px rgba(66, 61, 61, 0.9);
+}
+.btn{
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 10px;
+    margin: 0;
+    width: min-content;
+    color: #eaf3ec;
+    display: block;
+    line-height: 20px;
+    text-decoration: none;
+    font-family: Arial;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    border: none;
+    background-color: rgb(74, 103, 103);
+}
+.btn:hover{
+    color: #7cd8fd;
+    text-shadow: none;
+}
+input[type="submit"] {
+    white-space: normal;
+}
+/*Carousel*/
+.my-carousel{
+    margin: 10px 10px 10px 10px;
+    max-height: 600px;
+    width: 900px;
+
+
+}
+.carousel-item{
+
+
+}
+
+/*Carousel*/
+/*Sorting*/
+.sort{
+    border: solid;
+    border-color: rgb(74, 103, 103);
+}
+/*Sorting*/
+
+h3
+{
+    Color:black;
+    font-family: Arial;
+    font-size: 15pt;
+    text-align: center;
+}
+
+
+
+
+
+/*ProductList*/
+.productList{
+    margin: 10px;
+    padding-left:15px;
+    padding-right:15px;
+    border: blueviolet;
+    font-family: Arial;
+
+}
+.productName{
+    display: contents;
+    font-size: 12px;
+    width: min-content;
+}
+a.CartButton {
+    font-size: 15px;
+    color: #fff; /* цвет текста */
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    user-select: none; /* убирать выделение текста */
+    background-color: rgb(74, 103, 103); /* фон кнопки */
+    padding: 6px; /* отступ от текста */
+    border-radius: 10px;
+    margin-bottom: 5px;
+
+
+}
+a.CartButton:hover { background: rgb(63, 89, 89); } /* при наведении курсора мышки */
+a.CartButton:active {
+    background: #6e7c81;
+
+} /* при нажатии */
+/*ProductList*/
+
+
+/*orderList*/
+.orderList{
+
+    display: flex;
+    border: solid;
+    border-color: rgb(74, 103, 103);
+    border-radius: 12px;
+    margin: 5px 0 5px 0;
+}
+.orderList__omg{
+    margin-left: auto;
+    align-self: end;
+}
+/*orderList*/
+
+/*Footer*/
+footer
+{
+    background:#f1f1f1;
+    position: absolute;
+    left: 0;
+}
+/*Footer*/
+

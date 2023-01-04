@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <title>Личный кабинет администратора</title>
+</head>
+<body>
+<h3>Вы вошли в личный кабинет администратора</h3>
+<a href="/admin/orders">Полный список заказов</a>
+<a href="/admin/users">Полный список пользователей</a>
+<a href="/product">Полный список товаров</a>
+<a href="/admin/product/add">Добавить товар</a>
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="Выйти из личного кабинета">
+</form>
+
+<div th:each="product:${products}">
+    <hr>
+    <p th:text="'Наименование: '+${product.getTitle()}"></p>
+    <p th:text="'Описание товара: '+${product.getDescription()}"></p>
+    <p th:text="'Расположение склада: '+${product.getWarehouse()}"></p>
+    <p th:text="'Цена товара: '+${product.getPrice()}"></p>
+<!--    вытягивая категорию мы получаем объект, поэтому из этого объекта нужно получить наименование-->
+    <p th:text="'Категория товара: '+${product.getCategory().getName()}"></p>
+    <p th:text="'Продавец: '+${product.getSeller()}"></p>
+    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a>
+    <a th:href="@{/admin/product/delete{id}(id=${product.getId()})}">Удалить товар</a>
+
+    <hr>
+</div>
+
+</body>
+</html>

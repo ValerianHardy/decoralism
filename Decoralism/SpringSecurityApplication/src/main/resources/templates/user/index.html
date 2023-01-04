@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <title>Список товаров</title>
+</head>
+<body>
+<div class="container-fluid px-0" >
+    <header>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="logo"><h1>Decoralism</h1></div>
+            </div>
+            <div class=" col-md-1  align-self-center text-center wrapper">
+                <a class="btn" href="/index">Главная</a>
+            </div>
+            <div class="  col-md-1 align-self-center text-center wrapper">
+
+                <a class="btn" href="/index">Личный кабинет</a>
+            </div>
+            <div class=" col-md-1  align-self-center text-center wrapper">
+                <form method="get" th:action="@{/orders}">
+                    <input class="btn" type="submit" value="История заказов">
+                </form>
+            </div>
+            <div class="  col-md-1 align-self-center text-center wrapper">
+                <form method="get" th:action="@{/cart}">
+                    <input class="btn" type="submit" value="Корзина">
+                </form>
+            </div>
+            <div class="  col-md-1 align-self-center text-center wrapper">
+                <form method="post" th:action="@{/logout}">
+                    <input class="btn" type="submit" value="Выйти">
+                </form>
+            </div>
+            <div class="  col-md-1 align-self-center text-center wrapper">
+                <a class="btn" href="#second">Контакты</a>
+            </div>
+        </div>
+    </header>
+</div>
+<!--    th:src="@{/img/1621600473_10-phonoteka_org-p-fon-dlya-slaidov-v-prezentatsii-istoriya-10.jpg}"-->
+<div class="d-flex justify-content-center">
+    <div class="col-md-2 "></div>
+    <div class="col-md-8 my-carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:src="@{/img/super-ceny-0606-d-new.jpg}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/uslugi-po-remonty-1706-d.jpg}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/dostavka-v-den-zakaza-msk-d.jpg}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предыдущий</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следующий</span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-2 "></div>
+</div>
+
+<div class="container-fluid">
+
+
+
+    <div class="row ">
+        <div class="col-md-5 sort">
+            <form th:method="POST" th:action="@{/search}">
+                <fieldset>
+                    <legend>Выберите параметр для сортировки: </legend>
+                    <br>
+                    <label for="search">Поиск по наименованию</label>
+                    <input name="search" id="search" style="width: 291px;"  th:value="*{value_search}">
+                    <br>
+                    <label for="ot">Цена, ₽ От</label>
+                    <input type="text" name="ot" id="ot" placeholder="2000" th:value="*{value_price_ot}">
+                    <label for="do">До</label>
+                    <input type="text" name="do" id="do" placeholder="32000" th:value="*{value_price_do}">
+                    <br>
+                    <div>
+                        <label for="ascending_price">Отсортировать по возрастанию цены</label>
+                        <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+                        <br>
+                        <label for="descending_price">Отсортировать по убыванию цены</label>
+                        <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+                        <p>Категории товаров: </p>
+                        <label for="furniture">Декоративная мебель</label>
+                        <input type="radio" id="furniture" name="contact" value="furniture">
+                        <label for="lighting">Освещение</label>
+                        <input type="radio" id="lighting" name="contact" value="lighting">
+                        <label for="kitchen_sets">Кухонные гарнитуры</label>
+                        <input type="radio" id="kitchen_sets" name="contact" value="kitchen_sets">
+                        <br>
+                        <br>
+                        <input id="useFilter" type="submit" value="Применить фильтр" >
+                    </div>
+                </fieldset>
+                <br>
+            </form>
+
+
+            <div id="sortResult" class="row ">
+                <h4>Товары по Вашему запросу:</h4>
+                <div class="col-md-6 productList" th:each="product : ${search_product}">
+                    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="250px">
+                    <br>
+                    <a class="productName" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                    <p th:text="'Цена: ' + ${product.getPrice()} + ' ₽'"></p>
+                    <a class="CartButton" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Новые поступления в нашем магазине:</h3>
+            <div class="row">
+                <div class="col-md-3 productList" th:each="product:${product}">
+                    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="250px">
+                    <br>
+                    <a class="productName" th:href="@{/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                    <p th:text="'Цена: ' + ${product.getPrice()}+ ' ₽'"></p>
+                    <a class="CartButton" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <footer>
+
+    </footer>
+</div>
+<!--<div th:each="product:${products}">-->
+<!--    <p th:text="'Наименование: '+${product.getTitle()}"></p>-->
+<!--    <p th:text="'Описание товара: '+${product.getDescription()}"></p>-->
+<!--    <p th:text="'Расположение склада: '+${product.getWarehouse()}"></p>-->
+<!--    <p th:text="'Цена товара: '+${product.getPrice()}"></p>-->
+<!--    <p th:text="'Продавец: '+${product.getSeller()}"></p>-->
+<!--    <br>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+<!--    <script th:src="@{/js/index.js}"></script>-->
+<!--    <title>Главная страница</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h3>Главная страница магазина</h3>-->
+<!--&lt;!&ndash;// при проблеме перехода по ссылке можно устранить проблему, указав ссылку через thymeleaf&ndash;&gt;-->
+<!--<form method="post" th:action="@{/logout}">-->
+<!--    <input type="submit" value="Выйти из личного кабинета">-->
+<!--</form>-->
+<!--<br>-->
+<!--<form method="get" th:action="@{/cart}">-->
+<!--    <input type="submit" value="Корзина">-->
+<!--</form>-->
+<!--<form method="get" th:action="@{/orders}">-->
+<!--    <input type="submit" value="История заказов">-->
+<!--</form>-->
+<!--<br>-->
+<!--<form th:method="POST" th:action="@{/product/search}">-->
+<!--    <fieldset>-->
+<!--        <legend>Выберите параметр для сортировки: </legend>-->
+<!--        <br>-->
+<!--        <label for="search">Поиск по наименованию</label>-->
+<!--        <input name="search" id="search" >-->
+<!--        <br>-->
+<!--        <p>Цена, ₽</p>-->
+<!--        <label for="ot">От</label>-->
+<!--        <input type="text" name="ot" id="ot">-->
+<!--        <label for="do">До</label>-->
+<!--        <input type="text" name="do" id="do">-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <div>-->
+<!--            <label for="ascending_price">Отсортировать по возрастанию цены</label>-->
+<!--            <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">-->
+<!--            <br>-->
+<!--            <br>-->
+<!--            <label for="descending_price">Отсортировать по убыванию цены</label>-->
+<!--            <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">-->
+<!--            <p>Категории товаров: </p>-->
+<!--            <label for="furniture">Декоративная мебель</label>-->
+<!--            <input type="radio" id="furniture" name="contact" value="furniture">-->
+<!--            <label for="lighting">Освещение</label>-->
+<!--            <input type="radio" id="lighting" name="contact" value="lighting">-->
+<!--            <label for="kitchen_sets">Кухонные гарнитуры</label>-->
+<!--            <input type="radio" id="kitchen_sets" name="contact" value="kitchen_sets">-->
+<!--            <br>-->
+<!--            <br>-->
+<!--            <input type="submit" value="Применить фильтр">-->
+<!--        </div>-->
+<!--    </fieldset>-->
+<!--    <br>-->
+<!--</form>-->
+<!--<h3>Список товаров</h3>-->
+<!--<hr>-->
+<!--<div th:each="product:${product}">-->
+<!--    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--    <br>-->
+<!--    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--    <p th:text="'Цена: ' + ${product.getPrice()}"></p>-->
+<!--    <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

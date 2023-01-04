@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script th:src="@{/js/index.js}"></script>
+  <title>Заказы</title>
+</head>
+<body>
+<header>
+  <div class="row">
+    <div class="col-md-6">
+      <div id="logo"><h1>Decoralism</h1></div>
+    </div>
+    <div class=" col-md-1  align-self-center text-center wrapper">
+      <a class="btn" href="/index">Главная</a>
+    </div>
+    <div class="  col-md-1 align-self-center text-center wrapper">
+
+      <a class="btn" href="/index">Личный кабинет</a>
+    </div>
+    <div class=" col-md-1  align-self-center text-center wrapper">
+      <form method="get" th:action="@{/orders}">
+        <input class="btn" type="submit" value="История заказов">
+      </form>
+    </div>
+    <div class="  col-md-1 align-self-center text-center wrapper">
+      <form method="get" th:action="@{/cart}">
+        <input class="btn" type="submit" value="Корзина">
+      </form>
+    </div>
+    <div class="  col-md-1 align-self-center text-center wrapper">
+      <form method="post" th:action="@{/logout}">
+        <input class="btn" type="submit" value="Выйти">
+      </form>
+    </div>
+    <div class="  col-md-1 align-self-center text-center wrapper">
+      <a class="btn" href="#second">Контакты</a>
+    </div>
+  </div>
+</header>
+
+<div th:each="product : ${search_product}">
+  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+  <br>
+  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+  <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+  <hr>
+</div>
+
+
+
+
+<h3>Заказы</h3>
+<div th:each="order : ${orders}">
+  <h4 th:text="'Заказ № ' + ${order.getNumber()}"></h4>
+  <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+  <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+  <p th:text="'Количество: ' + ${order.getCount()}"></p>
+  <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+  <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+  <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+</div>
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+<!--  <script th:src="@{/js/index.js}"></script>-->
+<!--  <title>Заказы</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-6">-->
+<!--      <div id="logo"><h1>Decoralism</h1></div>-->
+<!--    </div>-->
+<!--    <div class=" col-md-1  align-self-center text-center wrapper">-->
+<!--      <a class="btn" href="/index">Главная</a>-->
+<!--    </div>-->
+<!--    <div class="  col-md-1 align-self-center text-center wrapper">-->
+
+<!--      <a class="btn" href="/index">Личный кабинет</a>-->
+<!--    </div>-->
+<!--    <div class=" col-md-1  align-self-center text-center wrapper">-->
+<!--      <form method="get" th:action="@{/orders}">-->
+<!--        <input class="btn" type="submit" value="История заказов">-->
+<!--      </form>-->
+<!--    </div>-->
+<!--    <div class="  col-md-1 align-self-center text-center wrapper">-->
+<!--      <form method="get" th:action="@{/cart}">-->
+<!--        <input class="btn" type="submit" value="Корзина">-->
+<!--      </form>-->
+<!--    </div>-->
+<!--    <div class="  col-md-1 align-self-center text-center wrapper">-->
+<!--      <form method="post" th:action="@{/logout}">-->
+<!--        <input class="btn" type="submit" value="Выйти">-->
+<!--      </form>-->
+<!--    </div>-->
+<!--    <div class="  col-md-1 align-self-center text-center wrapper">-->
+<!--      <a class="btn" href="#second">Контакты</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</header>-->
+
+<!--<div th:each="product : ${search_product}">-->
+<!--  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--  <br>-->
+<!--  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--  <p th:text="'Цена: ' + ${product.getPrice()}"></p>-->
+<!--  <hr>-->
+<!--</div>-->
+
+
+
+
+<!--<h3>Заказы</h3>-->
+<!--<div th:each="order : ${orders}">-->
+<!--  <h4 th:text="'Заказ № ' + ${order.getNumber()}"></h4>-->
+<!--  <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">-->
+<!--  <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>-->
+<!--  <p th:text="'Количество: ' + ${order.getCount()}"></p>-->
+<!--  <p th:text="'Цена: ' + ${order.getPrice()}"></p>-->
+<!--  <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>-->
+<!--  <p th:text="'Статус: ' + ${order.getStatus()}"></p>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
